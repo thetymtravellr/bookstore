@@ -1,20 +1,20 @@
-import { Route, Routes } from "react-router-dom";
-import Header from "./Components/Header";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Sidebar from "./Components/Sidebar";
 import Dashboard from "./Pages/Dashboard";
-import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
 
 function App() {
+  const location = useLocation();
   return (
     <div className="App flex">
-      <Sidebar></Sidebar>
-     <main className="w-full">
-       <Header></Header>
-     <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
+      {location.pathname === "/login" || location.pathname === "/register"  ? null : <Sidebar></Sidebar>}
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
-     </main>
     </div>
   );
 }

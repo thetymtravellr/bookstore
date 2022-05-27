@@ -4,11 +4,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'poppins': ['poppins', 'sans-serif']
+      },
       colors: {
         purple: {
           500: '#9669f5',
           600: '#773bf7',
-          700: '#6b29f8',
+          700: '#7e22ce',
           800: '#5520c7',
           900: '#430eb3',
         }
