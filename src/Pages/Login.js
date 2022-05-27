@@ -6,8 +6,8 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
   return (
     <div className="w-full h-full  min-h-screen flex">
-      <div className="w-2/4 bg-purple-700">hello</div>
-      <div className="w-2/4 bg-slate-900">
+      <div className="lg:block hidden w-2/4 bg-purple-700">hello</div>
+      <div className="w-full lg:w-2/4 bg-slate-900">
         <div className="w-full flex flex-col items-center justify-center h-full text-white ">
           <div className="w-2/4">
             <h1 className="text-5xl font-light pb-4 pr-12 mb-8 border-b-2 border-b-purple-600 w-fit">Sign In</h1>
@@ -46,7 +46,7 @@ const Login = () => {
               </div>
              <div className="flex items-center space-x-4">
              <input className="btn px-8 bg-purple-600 hover:bg-purple-500 text-white w-fit" type="submit" />
-             <p className="text-gray-400">dont have a account? <Link className="ml" to='/register'>REGISTER</Link></p>
+             <p className="text-gray-400">dont have a account? <Link className="ml text-purple-600 font-semibold hover:underline" to='/register'>REGISTER</Link></p>
              </div>
             </form>
           </div>
