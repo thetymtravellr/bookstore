@@ -45,7 +45,7 @@ const Login = () => {
                 </div>
               </div>
              <div className="flex items-center space-x-4">
-             <input className="btn px-8 bg-purple-600 hover:bg-purple-500 text-white w-fit" type="submit" />
+             <button className="btn border-0 px-8 bg-purple-600 hover:bg-purple-500 text-white w-fit">SignIn</button>
              <p className="text-gray-400">dont have a account? <Link className="ml text-purple-600 font-semibold hover:underline" to='/register'>REGISTER</Link></p>
              </div>
             </form>
