@@ -1,13 +1,25 @@
 import { Menu, Transition } from "@headlessui/react";
+import { signOut } from "firebase/auth";
 import { Fragment } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../firebase.init";
 
 const Disclosure = () => {
+
+  const [user,loading,error] = useAuthState(auth);
+
+  const placeHolderImg = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
+
+  const logOut = () => {
+    signOut(auth)
+  }
+
   return (
-    <div className="">
+    <div className="w-12 h-12 mx-4 grid place-content-center ">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-            <img className="w-10 h-10 object-cover rounded-full" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="dd" />
+          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-opacity-20  text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+            <img className="w-10 h-10 object-cover rounded-full" src={user?.photoURL || placeHolderImg} alt="user Pic" />
           </Menu.Button>
         </div>
         <Transition
@@ -20,12 +32,19 @@ const Disclosure = () => {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="px-1 py-1 bg-purple-600 rounded-t-md">
+              <Menu.Item>
+                <div className="py-2 text-white">
+                  <p className="text-center uppercase">{user?.displayName || 'welcome user'}</p>
+                </div>
+              </Menu.Item>
+            </div>
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? "bg-violet-500 text-white" : "text-gray-900"
+                      active ? "bg-purple-600 text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
@@ -47,7 +66,7 @@ const Disclosure = () => {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? "bg-violet-500 text-white" : "text-gray-900"
+                      active ? "bg-purple-600 text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
@@ -71,7 +90,7 @@ const Disclosure = () => {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? "bg-violet-500 text-white" : "text-gray-900"
+                      active ? "bg-purple-600 text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
@@ -93,7 +112,7 @@ const Disclosure = () => {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? "bg-violet-500 text-white" : "text-gray-900"
+                      active ? "bg-purple-600 text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
@@ -117,7 +136,7 @@ const Disclosure = () => {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? "bg-violet-500 text-white" : "text-gray-900"
+                      active ? "bg-purple-600 text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
@@ -132,6 +151,29 @@ const Disclosure = () => {
                       />
                     )}
                     Delete
+                  </button>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                  onClick={logOut}
+                    className={`${
+                      active ? "bg-purple-600 text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  >
+                    {active ? (
+                      <MoveActiveIcon
+                        className="mr-2 h-5 w-5 text-violet-400"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <MoveInactiveIcon
+                        className="mr-2 h-5 w-5 text-violet-400"
+                        aria-hidden="true"
+                      />
+                    )}
+                    Sign Out
                   </button>
                 )}
               </Menu.Item>

@@ -4,7 +4,7 @@ import React from "react";
 const Time = () => {
   const time = format(new Date(), "PP");
   return <div>
-      <p>{time}</p>
+      <p className="text-white ">{time}</p>
   </div>;
 };
 
