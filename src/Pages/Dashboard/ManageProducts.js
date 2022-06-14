@@ -7,7 +7,7 @@ import Modals from "../../Components/Modals/Modals";
 const ManageProducts = () => {
   const [confirm, setConfirm] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  console.log(confirm);
+
   const { data, isLoading, error, refetch } = useQuery("products", async () => {
     const res = await fetch(
       "https://agile-atoll-96122.herokuapp.com/products",

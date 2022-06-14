@@ -1,9 +1,8 @@
-import React from 'react';
-import Disclosure from './Disclosure';
-import SearchBar from './SearchBar';
-import Time from './Time';
+import Disclosure from '../Disclosure';
+import SearchBar from '../SearchBar';
+import Time from '../Time';
 
-const Header = () => {
+const DashboardHeader = () => {
     return (
         <header className='w-full h-20 flex justify-around items-center space-x-8 pl-28 pr-8 bg-primary sticky top-0 z-40'>
             <h1 className='w-fit text-3xl font-semibold  text-white'>Dashboard</h1>
@@ -16,4 +15,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default DashboardHeader;

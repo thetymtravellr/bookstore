@@ -8,12 +8,18 @@ import {
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
+import useToken from "../hooks/useToken";
 
 const Login = () => {
+  //hooks
   const [user, loading, error] = useAuthState(auth);
-  const [showPassword, setShowPassword] = useState(false);
+ 
   const navigate = useNavigate();
   const location = useLocation();
+
+  //states
+  const [showPassword, setShowPassword] = useState(false);
+
   const from = location.state?.from?.pathname || "/";
 
   const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
@@ -27,11 +33,13 @@ const Login = () => {
     signInWithEmailAndPassword(email, password);
   };
 
+  const [token] = useToken(user || emailUser?.user);
+
   useEffect(()=>{
-    if(user || emailUser){
+    if(token){
       navigate(from, { replace: true })
     }
-  },[user,emailUser,navigate,from])
+  },[token,user,emailUser,navigate,from])
 
   return (
     <div className="w-screen min-h-screen flex">

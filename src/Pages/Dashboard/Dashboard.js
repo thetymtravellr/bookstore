@@ -1,13 +1,12 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../../Components/Header";
-
+import DashboardHeader from "../../Components/Headers/DashboardHeader";
+import DashboardSidebar from "../../Components/Sidebars/DashboardSidebar";
 const Dashboard = () => {
-
   return (
     <>
+      <DashboardHeader></DashboardHeader>
+      <DashboardSidebar></DashboardSidebar>
       <main className="w-full pl-24">
-        <Header></Header>
         <div>
           <Outlet />
         </div>

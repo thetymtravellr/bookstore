@@ -7,7 +7,7 @@ import {
   ViewGridIcon
 } from "@heroicons/react/outline";
 import React from "react";
-import CustomLink from "./CustomLink";
+import CustomLink from "../CustomLink";
 
 const Sidebar = () => {
   return (

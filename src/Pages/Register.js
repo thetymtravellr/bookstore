@@ -7,9 +7,14 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from '../firebase.init';
 
 const Register = () => {
+  //hooks
   const [user,loading,error] = useAuthState(auth);
-  const [showPassword, setShowPassword] = useState(false);
+  const { register, handleSubmit } = useForm();
   const navigate = useNavigate()
+
+
+  //states
+  const [showPassword, setShowPassword] = useState(false);
 
   const [
     createUserWithEmailAndPassword,
@@ -21,8 +26,6 @@ const Register = () => {
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
   const [sendEmailVerification, sending, verificationError] = useSendEmailVerification(auth);
-
-  const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
     
@@ -37,7 +40,6 @@ const Register = () => {
   };
   
   if(user){
-    console.log(user);
     navigate('/verifyEmail')
   }
 
