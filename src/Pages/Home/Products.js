@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ProductCard from "../../Components/ProductCard";
+import useProducts from "../../hooks/useProducts";
 
 const Products = () => {
   const [active, setActive] = useState("forYou");
-  const [products, setProducts] = useState([]);
-  
-  useEffect(() => {
-    fetch("data.json")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, [products]);
+  const [products] = useProducts();
 
   return (
     <div>
@@ -41,7 +36,7 @@ const Products = () => {
       </div>
       <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-6 my-12">
         {products.map((product) => (
-          <ProductCard product={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>

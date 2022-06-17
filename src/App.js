@@ -1,23 +1,24 @@
-import { Route, Routes } from "react-router-dom";
-import RequireAuth from "./Components/Authorization/RequireAuth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Route, Routes, useLocation } from "react-router-dom";
 import UserHeader from "./Components/Headers/UserHeader";
-import Dashboard from "./Pages/Dashboard/Dashboard";
-import ManageOrders from "./Pages/Dashboard/ManageOrders";
-import ManageProducts from "./Pages/Dashboard/ManageProducts";
-import ManageUsers from "./Pages/Dashboard/ManageUsers";
-import Summary from "./Pages/Dashboard/Summary";
+import auth from "./firebase.init";
+import Cart from "./Pages/Cart/Cart";
 import Home from "./Pages/Home/Home";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
-import VerifyEmailMessage from "./Pages/VerifyEmailMessage";
+import Login from "./Pages/Login/Login";
+import Register from "./Pages/Login/Register";
 
 function App() {
+  const location = useLocation()
+  const [user] = useAuthState(auth)
   return (
     <div className="App">
-      <UserHeader/>
+      {(location.pathname === '/login' || location.pathname === '/register') ? null :  <UserHeader/>}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
+        <Route path="/cart" element={<Cart />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        {/* <Route
           path="/dashboard"
           element={
             <RequireAuth>
@@ -29,10 +30,7 @@ function App() {
           <Route path="manageOrders" element={<ManageOrders />} />
           <Route path="manageProducts" element={<ManageProducts />} />
           <Route path="manageUsers" element={<ManageUsers />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/verifyEmail" element={<VerifyEmailMessage />} />
+        </Route> */}
       </Routes>
     </div>
   );

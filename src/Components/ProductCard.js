@@ -1,6 +1,7 @@
 import HeartIconOutline from "@heroicons/react/outline/HeartIcon";
 import HeartIconSolid from "@heroicons/react/solid/HeartIcon";
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
   const { category, details, rating, image, title, price } = product;
@@ -20,9 +21,9 @@ const ProductCard = ({ product }) => {
         <p>{rating}</p>
         <p className="text-green-500">${price.toFixed(2)}</p>
         <div className="flex items-center space-x-2 mt-4 absolute bottom-4">
-          <button className="bg-black text-white px-3 py-2 rounded-xl">
+          <Link to='/cart' className="bg-black text-white px-3 py-2 rounded-xl">
             Add to cart
-          </button>
+          </Link>
           <button className="text-red-500" onClick={() => setLiked(!liked)}>
             {liked ? (
               <HeartIconSolid className="w-6" />

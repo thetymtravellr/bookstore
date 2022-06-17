@@ -1,4 +1,3 @@
-import Disclosure from '../Disclosure';
 import SearchBar from '../SearchBar';
 import Time from '../Time';
 
@@ -9,7 +8,6 @@ const DashboardHeader = () => {
             <div className='w-full flex items-center justify-end space-x-14'>
             <SearchBar></SearchBar>
             <Time></Time>
-            <Disclosure></Disclosure>
             </div>
         </header>
     );

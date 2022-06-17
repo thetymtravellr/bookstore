@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "category": "Business & Money",
     "details": "lorem ipsum lorem ipsum",
     "rating": 5,
@@ -8,6 +9,7 @@
     "price": 22.0
   },
   {
+    "id": 2,
     "category": "Bean Dale",
     "details": "lorem ipsum lorem ipsum",
     "rating": "ipsum",
@@ -16,50 +18,56 @@
     "price": 22
   },
   {
+    "id": 3,
     "category": "Lucille Fitzpatrick",
     "details": "lorem ipsum lorem ipsum",
     "rating": "ipsum",
-    "image": "https://i.ibb.co/Q9gGhyr/book3.png",
+    "image": "https://i.ibb.co/tYF0NRy/book1.png",
     "title": "Garrett Rush",
     "price": 22
   },
   {
+    "id": 4,
     "category": "Cooley Brock",
     "details": "lorem ipsum lorem ipsum",
     "rating": "ipsum",
-    "image": "https://i.ibb.co/ZN68nW9/book4.png",
+    "image": "https://i.ibb.co/Q9gGhyr/book3.png",
     "title": "Johnson Lindsay",
     "price": 22
   },
   {
+    "id": 5,
     "category": "Kerri Odom",
     "details": "lorem ipsum lorem ipsum",
     "rating": "ipsum",
-    "image": "https://i.ibb.co/tYF0NRy/book1.png",
+    "image": "https://i.ibb.co/ZN68nW9/book4.png",
     "title": "Holt Boone",
     "price": 22
   },
   {
+    "id": 6,
     "category": "Bernadette Goodman",
     "details": "lorem ipsum lorem ipsum",
     "rating": "ipsum",
-    "image": "https://i.ibb.co/tYF0NRy/book1.png",
+    "image": "https://i.ibb.co/sbVBTJS/yellow-business.png",
     "title": "Luisa Holder",
     "price": 22
   },
   {
+    "id": 7,
     "category": "Russo Dodson",
     "details": "lorem ipsum lorem ipsum",
     "rating": "ipsum",
-    "image": "https://i.ibb.co/tYF0NRy/book1.png",
+    "image": "https://i.ibb.co/2k8xxSW/verynice.png",
     "title": "Spencer Bowers",
     "price": 22
   },
   {
+    "id": 8,
     "category": "Rose Gross",
     "details": "lorem ipsum lorem ipsum",
     "rating": "ipsum",
-    "image": "https://i.ibb.co/tYF0NRy/book1.png",
+    "image": "https://i.ibb.co/ct0k89s/greatgatsby.png",
     "title": "Villarreal Patel",
     "price": 22
   }
