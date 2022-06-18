@@ -6,6 +6,7 @@ import Cart from "./Pages/Cart/Cart";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Login/Register";
+import Wishlist from "./Pages/Wishlist/Wishlist";
 
 function App() {
   const location = useLocation()
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         {/* <Route

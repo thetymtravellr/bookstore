@@ -10,7 +10,7 @@ const useCart = () => {
     data: cart,
     refetch,
   } = useQuery("cart", async () => {
-    const res = await fetch(`http://localhost:8080/cart?email=${user?.email}`);
+    const res = await fetch(`https://arcane-taiga-01155.herokuapp.com/cart?email=${user?.email}`);
     return res.json();
   });
 

@@ -4,7 +4,7 @@ import useBooks from "../../hooks/useBooks";
 
 const Products = () => {
   const [active, setActive] = useState("forYou");
-  const [books,isLoading,error,refetch] = useBooks();
+  const {books,isLoading,error,refetch} = useBooks();
 
   if (isLoading) {
     return <p>Loading</p>;

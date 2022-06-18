@@ -27,7 +27,7 @@ const UserHeader = () => {
               <Link to="/">Book Store</Link>
             </li>
             <li>
-              <Link to="/">Wishlist</Link>
+              <Link to="/wishlist">Wishlist</Link>
             </li>
             <li>
               <Link to="/">My Collection</Link>

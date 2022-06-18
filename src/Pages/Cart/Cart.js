@@ -17,7 +17,7 @@ const Cart = () => {
       <div className="w-full border flex justify-between px-6 py-4 text-3xl font-semibold">
         <h1>Cart</h1>
         <p>
-          {/* {myCart.length} {myCart.length > 1 ? "items" : "item"} */}
+          {cart.length} {cart.length > 1 ? "items" : "item"}
         </p>
       </div>
       <div className="my-6 px-6">

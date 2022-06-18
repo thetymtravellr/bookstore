@@ -3,18 +3,22 @@ import HeartIconSolid from "@heroicons/react/solid/HeartIcon";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
 import useCart from "../hooks/useCart";
+import useDB from "../hooks/useDB";
 
 const ProductCard = ({ book, refetchBook }) => {
-  const [user] = useAuthState(auth);
-  const {cart,isLoading,error,refetch} = useCart()
   const { _id, category, details, rating, image, title, price, wishlisted } =
     book;
 
-    if(isLoading){
-      return <p>loading</p>
-    }
+  const [user] = useAuthState(auth);
+  const { cart, isLoading, error, refetch } = useCart();
+  const { addToList, removeFromList } = useDB(_id);
+
+  if (isLoading) {
+    return <p>loading</p>;
+  }
   const listed = wishlisted.find((e) => e === user?.email);
-  const added = cart.find(e => e.title === title);
+  const added = cart.find((e) => e.title === title);
+
   const addToCart = () => {
     const item = {
       category,
@@ -26,7 +30,7 @@ const ProductCard = ({ book, refetchBook }) => {
       customer: user.email,
     };
 
-    fetch(`http://localhost:8080/cart`, {
+    fetch(`https://arcane-taiga-01155.herokuapp.com/cart`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -41,22 +45,39 @@ const ProductCard = ({ book, refetchBook }) => {
       });
   };
 
-  const addToList = (id) => {
-    const email = user.email;
-    fetch(`http://localhost:8080/books/wishlisted/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          refetchBook();
-        }
-      });
-  };
+  // const addToList = (id) => {
+  //   const email = user.email;
+  //   fetch(`http://localhost:8080/books/wishlisted/${id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({ email }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.acknowledged) {
+  //         refetchBook();
+  //       }
+  //     });
+  // };
+
+  // const removeFromList = (id) =>{
+  //   const email = user.email;
+  //   fetch(`http://localhost:8080/books/removeFromList/${id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({ email }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.acknowledged) {
+  //         refetchBook();
+  //       }
+  //     });
+  // }
 
   return (
     <div className="h-56 border flex w-full max-w-xs rounded-md mx-auto md:mx-0 relative">
@@ -78,15 +99,17 @@ const ProductCard = ({ book, refetchBook }) => {
             disabled={added}
             className="btn text-white px-3 py-2 rounded-xl"
           >
-            Add to cart
+            {added ? "added" : "Add to cart"}
           </button>
-          <button className="text-red-500" onClick={() => addToList(_id)}>
-            {listed ? (
+          {listed ? (
+            <button className="text-red-500" onClick={removeFromList}>
               <HeartIconSolid className="w-6" />
-            ) : (
+            </button>
+          ) : (
+            <button className="text-red-500" onClick={addToList}>
               <HeartIconOutline className="w-6" />
-            )}
-          </button>
+            </button>
+          )}
         </div>
       </div>
     </div>

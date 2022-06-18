@@ -7,12 +7,11 @@ const useBooks = () => {
     data: books,
     refetch,
   } = useQuery("allBooks", async () => {
-    const res = await fetch("http://localhost:8080/books");
+    const res = await fetch("https://arcane-taiga-01155.herokuapp.com/books");
     return res.json();
   });
 
-
-  return [books,isLoading,error, refetch]
+  return {books,isLoading,error, refetch}
 };
 
 export default useBooks;
