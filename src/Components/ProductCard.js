@@ -1,11 +1,63 @@
 import HeartIconOutline from "@heroicons/react/outline/HeartIcon";
 import HeartIconSolid from "@heroicons/react/solid/HeartIcon";
-import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../firebase.init";
+import useCart from "../hooks/useCart";
 
-const ProductCard = ({ product }) => {
-  const { category, details, rating, image, title, price } = product;
-  const [liked, setLiked] = useState(false);
+const ProductCard = ({ book, refetchBook }) => {
+  const [user] = useAuthState(auth);
+  const {cart,isLoading,error,refetch} = useCart()
+  const { _id, category, details, rating, image, title, price, wishlisted } =
+    book;
+
+    if(isLoading){
+      return <p>loading</p>
+    }
+  const listed = wishlisted.find((e) => e === user?.email);
+  const added = cart.find(e => e.title === title);
+  const addToCart = () => {
+    const item = {
+      category,
+      details,
+      rating,
+      image,
+      title,
+      price,
+      customer: user.email,
+    };
+
+    fetch(`http://localhost:8080/cart`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(item),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          refetch();
+        }
+      });
+  };
+
+  const addToList = (id) => {
+    const email = user.email;
+    fetch(`http://localhost:8080/books/wishlisted/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          refetchBook();
+        }
+      });
+  };
+
   return (
     <div className="h-56 border flex w-full max-w-xs rounded-md mx-auto md:mx-0 relative">
       <img
@@ -21,11 +73,15 @@ const ProductCard = ({ product }) => {
         <p>{rating}</p>
         <p className="text-green-500">${price.toFixed(2)}</p>
         <div className="flex items-center space-x-2 mt-4 absolute bottom-4">
-          <Link to='/cart' className="bg-black text-white px-3 py-2 rounded-xl">
+          <button
+            onClick={addToCart}
+            disabled={added}
+            className="btn text-white px-3 py-2 rounded-xl"
+          >
             Add to cart
-          </Link>
-          <button className="text-red-500" onClick={() => setLiked(!liked)}>
-            {liked ? (
+          </button>
+          <button className="text-red-500" onClick={() => addToList(_id)}>
+            {listed ? (
               <HeartIconSolid className="w-6" />
             ) : (
               <HeartIconOutline className="w-6" />

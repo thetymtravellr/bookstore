@@ -1,19 +1,23 @@
-import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/outline";
+import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline';
 import useCart from "../../hooks/useCart";
-import useProducts from "../../hooks/useProducts";
 
 const Cart = () => {
-  const [products] = useProducts();
-  const [cart] = useCart()
+  const {cart,isLoading,error} = useCart()
+  
+  if (isLoading) {
+    return <p>Loading</p>;
+  }
 
-  const myCart = products.filter((product) => cart.indexOf(product.id) !== -1);
+  if (error) {
+    return <p>error</p>;
+  }
 
   return (
     <div>
       <div className="w-full border flex justify-between px-6 py-4 text-3xl font-semibold">
         <h1>Cart</h1>
         <p>
-          {myCart.length} {myCart.length > 1 ? "items" : "item"}
+          {/* {myCart.length} {myCart.length > 1 ? "items" : "item"} */}
         </p>
       </div>
       <div className="my-6 px-6">
@@ -27,7 +31,7 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {myCart.map((item) => (
+            {cart.map((item) => (
               <tr className="">
                 <td className="w-2/5">
                   <div className="flex space-x-2 items-center">

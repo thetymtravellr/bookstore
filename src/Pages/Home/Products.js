@@ -1,10 +1,18 @@
 import { useState } from "react";
-import ProductCard from "../../Components/ProductCard";
-import useProducts from "../../hooks/useProducts";
+import ProductCard from '../../Components/ProductCard';
+import useBooks from "../../hooks/useBooks";
 
 const Products = () => {
   const [active, setActive] = useState("forYou");
-  const [products] = useProducts();
+  const [books,isLoading,error,refetch] = useBooks();
+
+  if (isLoading) {
+    return <p>Loading</p>;
+  }
+
+  if (error) {
+    return <p>error</p>;
+  }
 
   return (
     <div>
@@ -35,8 +43,8 @@ const Products = () => {
         </button>
       </div>
       <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-6 my-12">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        {books.map((book) => (
+          <ProductCard key={book.id} book={book} refetchBook={refetch}/>
         ))}
       </div>
     </div>

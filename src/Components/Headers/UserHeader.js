@@ -8,18 +8,20 @@ import useCart from "../../hooks/useCart";
 
 const UserHeader = () => {
   const [navOpen, setNavOpen] = useState(false);
-  const [cart] = useCart();
+  const {cart,isLoading} = useCart()
   const [user, loading, error] = useAuthState(auth);
-  if (loading) {
+  
+  if (loading || isLoading) {
     console.log("loading");
   }
   if (error) {
     console.log("error");
   }
+
   return (
-    <header className="py-4 px-6 sticky top-0 bg-white z-20 border-b">
+    <header className="py-2 px-6 sticky top-0 bg-white z-20 border-b">
       <nav className="flex justify-between items-center">
-        <div className="w-1/3 md:block hidden">
+        <div className="w-1/3 md:block hidden ">
           <ul className="flex space-x-2 text-md font-semibold">
             <li>
               <Link to="/">Book Store</Link>
@@ -42,12 +44,13 @@ const UserHeader = () => {
             <li className="flex items-center">
               <Link to="/cart" className="indicator h-6">
                 <ShoppingCartIcon className="w-6" />
-                <span class="indicator-item badge text-[10px] text-white p-1 h-4 bg-red-600 border-red-500">
-                  {cart.length}
+                <span class="indicator-item badge text-sm text-white p-1 h-5 bg-red-600 border-red-500">
+                  {cart?.length}
                 </span>
               </Link>
             </li>
             {user ? (
+            <>
               <li>
                 <div class="dropdown dropdown-end">
                   <label tabindex="0" class="btn btn-ghost btn-circle avatar">
@@ -76,12 +79,13 @@ const UserHeader = () => {
                     </li>
                   </ul>
                 </div>
-                <li>
-                  <Link to="/">
-                    Hi, <span>{user.displayName}</span>
-                  </Link>
-                </li>
               </li>
+              <li>
+              <Link to="/">
+                Hi, <span>{user.displayName}</span>
+              </Link>
+            </li>
+            </>
             ) : (
               <li className="">
                 <Link to="/login" className="btn btn-ghost">Login</Link>
